@@ -23,6 +23,12 @@
       "backgroundColor": "#434343ff",
       "barStyle": "dark-content"
     },
+    "android": {
+      "navigationBar": {
+        "backgroundColor": "#1a1a1a",
+        "buttonStyle": "dark"
+      }
+    },
     "plugins": [
       [
         "expo-navigation-bar",
