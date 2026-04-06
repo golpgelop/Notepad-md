@@ -9,11 +9,10 @@ import { useEffect } from 'react';
 
 const App: React.FC = () => {
 
-    // useEffect(() => {
-    //     SystemUI.setBackgroundColorAsync('#1a1a1a');
-
-    //     NavigationBar.setButtonStyleAsync('light');
-    // }, []);
+    useEffect(() => {
+        SystemUI.setBackgroundColorAsync('#1a1a1a');
+        NavigationBar.setButtonStyleAsync('light');
+    }, []);
 
     return (
         <View style={app.container}>
