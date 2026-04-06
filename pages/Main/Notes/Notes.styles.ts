@@ -2,8 +2,13 @@ import { StyleSheet } from 'react-native';
 
 export const notes = StyleSheet.create({
     container: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
 
     },
+    
     note: {
         position: 'absolute',
         backgroundColor: '#393939ff',
@@ -15,6 +20,7 @@ export const notes = StyleSheet.create({
         paddingLeft: 20,
         color: '#ffffffff',
     },
+
     head: {
         position: 'absolute',
         color: '#ffffffff',
@@ -22,6 +28,7 @@ export const notes = StyleSheet.create({
         left: 20,
         top: 10
     },
+    
     description: {
         position: 'absolute',
         color: '#ffffffff',

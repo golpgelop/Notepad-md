@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { notes, getNoteStyle } from './Notes.styles';
 import React from 'react';
 
@@ -19,14 +19,16 @@ const Notes: React.FC = () => {
     ];
 
     return (
-        <View style={notes.container}>
-            {notesData.map(note => (
-                <View key={note.id} style={[notes.note, getNoteStyle(note.id)]}>
-                    <Text style={notes.head}>{note.title}</Text>
-                    <Text style={notes.description}>{note.description}</Text>
-                </View>
-            ))}
-        </View>
+        <ScrollView>
+            <View style={notes.container}>
+                {notesData.map(note => (
+                    <View key={note.id} style={[notes.note, getNoteStyle(note.id)]}>
+                        <Text style={notes.head}>{note.title}</Text>
+                        <Text style={notes.description}>{note.description}</Text>
+                    </View>
+                ))}
+            </View>
+        </ScrollView>
     );
 }
 
