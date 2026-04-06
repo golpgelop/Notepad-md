@@ -15,14 +15,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -30,6 +22,17 @@
       "visible": "always",
       "backgroundColor": "#434343ff",
       "barStyle": "dark-content"
-    }
+    },
+    "plugins": [
+      [
+        "expo-navigation-bar",
+        {
+          "enforceContrast": true,
+          "barStyle": "dark",
+          "visibility": "visible"
+        }
+      ],
+      "expo-router"
+    ]
   }
 }

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const notes = StyleSheet.create({
     container: {
-        
+        paddingBottom: 200
     },
     
     note: {
@@ -15,6 +15,8 @@ export const notes = StyleSheet.create({
         borderRadius: 30,
         paddingLeft: 20,
         color: '#ffffffff',
+        borderWidth: 0.5,
+        borderColor: '#ffffffff',
     },
 
     head: {

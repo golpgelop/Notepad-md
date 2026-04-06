@@ -13,16 +13,18 @@ const Main: React.FC = () => {
     return (
 
         <View style={main.container}>
-            <TextInput
-                style={main.inputSearch}
-                placeholder="Введите текст"
-                placeholderTextColor='#ffffffff'
-                value={text}
-                onChangeText={setText}
-            />
 
-            <Notes/>
 
+            <Notes />
+            <View style={main.cut}>
+                <TextInput
+                    style={main.inputSearch}
+                    placeholder="Введите текст"
+                    placeholderTextColor='#ffffffff'
+                    value={text}
+                    onChangeText={setText}
+                />
+            </View>
             <TouchableOpacity
                 onPress={() => Alert.alert('Нажато!')}
                 style={main.buttonAdd}

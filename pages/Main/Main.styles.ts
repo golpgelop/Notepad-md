@@ -7,14 +7,14 @@ export const main = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#449b07ff',
+        backgroundColor: '#434343ff',
     },
 
     buttonAdd: {
         position: 'absolute',
         bottom: 70,
         right: 20,
-        backgroundColor: '#393939ff',
+        backgroundColor: '#393939cc',
         height: 50,
         width: 50,
         borderRadius: 50,
@@ -35,5 +35,16 @@ export const main = StyleSheet.create({
         borderRadius: 30,
         paddingLeft: 20,
         color: '#ffffffff',
+        borderWidth: 0.2,
+        borderColor: '#ffffffff',
+    },
+    cut: {
+        position: 'absolute',
+        backgroundColor: '#434343ff',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 110,
+        
     }
 });

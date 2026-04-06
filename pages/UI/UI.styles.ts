@@ -3,14 +3,13 @@ import { StyleSheet } from 'react-native';
 export const ui = StyleSheet.create({
     container: {
         position: 'absolute',
-        backgroundColor: '#393939ff',
+        backgroundColor: '#434343ff',
         height: 60,
         left: 0,
         right: 0,
         bottom: 0,
-        borderTopColor: '#ffffffff',
-        borderTopWidth: 3,
         flexDirection: 'row',
+        paddingTop: 5
     },
 
     buttonAdd: {
@@ -30,8 +29,8 @@ export const ui = StyleSheet.create({
 
     Button: {
         backgroundColor: '#3c3c3cff',
-        borderWidth: 1,
-        borderRadius: 10,
+        borderWidth: 0.2,
+        borderRadius: 15,
         borderColor: '#ffffffff',
         alignItems: 'center',
         justifyContent: 'center',
