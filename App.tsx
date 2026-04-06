@@ -1,20 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { app } from './App.styles';
+import { useEffect } from 'react';
+import PageManager from './pages/PageManager';
+import * as NavigationBar from 'expo-navigation-bar';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Стартовая точка</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const App: React.FC = () => {
+        return (
+            <View style={app.container}>
+                <PageManager />
+                <StatusBar style="auto" />
+            </View>
+        );
+    }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

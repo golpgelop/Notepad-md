@@ -25,6 +25,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "androidNavigationBar": {
+      "visible": "always",
+      "backgroundColor": "#434343ff",
+      "barStyle": "dark-content"
     }
   }
 }
