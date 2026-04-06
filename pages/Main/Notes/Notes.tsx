@@ -5,10 +5,12 @@ import React from 'react';
 const Notes: React.FC = () => {
 
     return (
+
         <View style={notes.container}>
-            <Text>Название</Text>
-            <Text>Какое-то содержание</Text>
+            <Text style={notes.head}>Название</Text>
+            <Text style={notes.description}>Какое-то содержание</Text>
         </View>
+
     );
 }
 

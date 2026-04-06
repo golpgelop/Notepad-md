@@ -2,6 +2,7 @@ import { TouchableOpacity, View, Alert, TextInput } from 'react-native';
 import { Image } from 'expo-image';
 import { main } from './Main.styles';
 import React, { useState } from 'react';
+import Notes from './Notes/Notes';
 
 const imageAdd = require('../../assets/addWhite.png');
 
@@ -19,6 +20,8 @@ const Main: React.FC = () => {
                 value={text}
                 onChangeText={setText}
             />
+
+            <Notes/>
 
             <TouchableOpacity
                 onPress={() => Alert.alert('Нажато!')}
