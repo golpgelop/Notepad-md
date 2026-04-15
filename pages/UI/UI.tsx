@@ -3,6 +3,7 @@ import { ui } from './UI.styles';
 import { IBasePage, PAGES } from '../PageManager';
 
 
+
 const UI: React.FC<IBasePage> = (props) => {
     const { setPage } = props;
 
@@ -10,24 +11,26 @@ const UI: React.FC<IBasePage> = (props) => {
         setPage(PAGES.MAIN)
     }
 
-    const handlePressExplorer = () => {
-        setPage(PAGES.EXPLORER)
+    const handlePressVisualEditor = () => {
+        setPage(PAGES.VISUAL_EDITOR)
     }
 
-    const handlePressSetting = () => {
-        setPage(PAGES.SETTING)
+    const handlePressEditor = () => {
+        setPage(PAGES.EDITOR)
     }
-    
+
     return (
         <View style={ui.container}>
             <TouchableOpacity style={ui.Button} onPress={handlePressMain}>
                 <Text style={ui.ButtonText}>Заметки</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={ui.Button} onPress={handlePressExplorer}>
-                <Text style={ui.ButtonText}>Проводник</Text>
+
+            <TouchableOpacity style={ui.Button} onPress={handlePressVisualEditor}>
+                <Text style={ui.ButtonText}>Текст</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={ui.Button} onPress={handlePressSetting}>
-                <Text style={ui.ButtonText}>Настройки</Text>
+
+            <TouchableOpacity style={ui.Button} onPress={handlePressEditor}>
+                <Text style={ui.ButtonText}>Код</Text>
             </TouchableOpacity>
         </View>
     );
