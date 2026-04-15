@@ -1,27 +1,27 @@
 import { TouchableOpacity, View, Alert, TextInput, Text } from 'react-native';
-import { visualEditor } from './VisualEditor.styles';
+import { codeEditor } from './CodeEditor.styles';
 import React, { useState } from 'react';
 
-import PanelUp from './PanelUp/PanelUp';
 import PanelDown from './PanelDown/PanelDown';
+import NumberBar from './NumberBar/NumberBar';
 
 import { useKeyboard } from '../../hooks/useKeyboard';
 
-const VisualEditor: React.FC = () => {
+const CodeEditor: React.FC = () => {
 
     const [text, setText] = useState('');
     const isKeyboardVisible = useKeyboard();
 
     return (
-        <View style={visualEditor.container}>
+        <View style={codeEditor.container}>
 
-            <PanelUp/>
-            {isKeyboardVisible && <PanelDown/>}
+            {isKeyboardVisible && <PanelDown />}
+            <NumberBar number={10} currentLine={1} />
 
         </View>
     );
 }
 
-export default VisualEditor;
+export default CodeEditor;
 
 

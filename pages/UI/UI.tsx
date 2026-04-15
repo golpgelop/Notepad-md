@@ -15,8 +15,8 @@ const UI: React.FC<IBasePage> = (props) => {
         setPage(PAGES.VISUAL_EDITOR)
     }
 
-    const handlePressEditor = () => {
-        setPage(PAGES.EDITOR)
+    const handlePressCodeEditor = () => {
+        setPage(PAGES.CODE_EDITOR)
     }
 
     return (
@@ -29,7 +29,7 @@ const UI: React.FC<IBasePage> = (props) => {
                 <Text style={ui.ButtonText}>Текст</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressEditor}>
+            <TouchableOpacity style={ui.Button} onPress={handlePressCodeEditor}>
                 <Text style={ui.ButtonText}>Код</Text>
             </TouchableOpacity>
         </View>
