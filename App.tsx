@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { StatusBar } from 'expo-status-bar';
 import { View, AppState, AppStateStatus } from 'react-native';
 import { app } from './App.styles';
@@ -5,7 +7,10 @@ import PageManager from './pages/PageManager';
 
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import Store from './services/Store/Store';
+
+export const StoreContext = React.createContext<Store>(null!);
 
 const App: React.FC = () => {
 
@@ -29,12 +34,16 @@ const App: React.FC = () => {
         };
     }, []);
 
+    const store = new Store;
 
 
     return (
+
         <View style={app.container}>
-            <PageManager />
-            <StatusBar style="auto" />
+            <StoreContext.Provider value={store}>
+                <PageManager />
+                <StatusBar style="auto" />
+            </StoreContext.Provider>
         </View>
     );
 }
