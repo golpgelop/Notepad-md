@@ -4,13 +4,13 @@ import React from 'react';
 import { numberBar } from './NumberBar.styles';
 
 interface INumberBarProps {
-    number: number;
+    numberLen: number;
     currentLine?: number;
 }
 
-const NumberBar: React.FC<INumberBarProps> = ({ number, currentLine }) => {
+const NumberBar: React.FC<INumberBarProps> = ({ numberLen, currentLine }) => {
 
-    const lines = Array.from({ length: number }, (_, i) => i + 1);
+    const lines = Array.from({ length: numberLen }, (_, i) => i + 1);
 
     return (
         <View style={numberBar.container}>

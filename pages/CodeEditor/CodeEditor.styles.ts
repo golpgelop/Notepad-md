@@ -7,8 +7,8 @@ export const codeEditor = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: '#ffb983ff',
-    },
+        backgroundColor: '#626262ff',
+    }, 
 
     Button: {
         backgroundColor: '#3c3c3cff',

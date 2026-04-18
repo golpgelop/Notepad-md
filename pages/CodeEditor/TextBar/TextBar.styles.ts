@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
 
-export const numberBar = StyleSheet.create({ 
+export const textBar = StyleSheet.create({
     container: {
+        marginLeft: 40,
         position: 'absolute',
         paddingTop: 50,
         top: 0,
         left: 0,
         bottom: 0,
-        backgroundColor: '#595959ff',
-        width:40,
-        alignItems: 'flex-end',
-        paddingRight: 5,
+        backgroundColor: '#3c3c3cff',
     },
 
     lineNumber: {
@@ -21,5 +19,5 @@ export const numberBar = StyleSheet.create({
         color: '#ffffffff',
     },
 
-    
+
 });
