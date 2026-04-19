@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.golpgelop.notepadmd",
@@ -20,13 +22,17 @@
           {
             "CFBundleTypeName": "Markdown Document",
             "LSHandlerRank": "Default",
-            "LSItemContentTypes": ["com.golpgelop.notepadmd.markdown"],
+            "LSItemContentTypes": [
+              "com.golpgelop.notepadmd.markdown"
+            ],
             "CFBundleTypeRole": "Viewer"
           },
           {
             "CFBundleTypeName": "Text Document",
             "LSHandlerRank": "Default",
-            "LSItemContentTypes": ["public.plain-text"],
+            "LSItemContentTypes": [
+              "public.plain-text"
+            ],
             "CFBundleTypeRole": "Viewer"
           }
         ],
@@ -34,10 +40,20 @@
           {
             "UTTypeIdentifier": "com.golpgelop.notepadmd.markdown",
             "UTTypeTagSpecification": {
-              "public.filename-extension": ["md", "markdown", "mdown", "mkdn"],
-              "public.mime-type": ["text/markdown", "text/x-markdown"]
+              "public.filename-extension": [
+                "md",
+                "markdown",
+                "mdown",
+                "mkdn"
+              ],
+              "public.mime-type": [
+                "text/markdown",
+                "text/x-markdown"
+              ]
             },
-            "UTTypeConformsTo": ["public.text"],
+            "UTTypeConformsTo": [
+              "public.text"
+            ],
             "UTTypeDescription": "Markdown Document"
           }
         ],
@@ -53,7 +69,10 @@
       "intentFilters": [
         {
           "action": "VIEW",
-          "category": ["DEFAULT", "BROWSABLE"],
+          "category": [
+            "DEFAULT",
+            "BROWSABLE"
+          ],
           "data": [
             {
               "scheme": "file",
@@ -91,6 +110,12 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "notepad-md"
+    "scheme": "notepad-md",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "acd66513-dfac-48ba-9c8d-253bfe896ee0"
+      }
+    }
   }
 }
