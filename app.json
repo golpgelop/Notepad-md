@@ -1,125 +1,96 @@
 {
   "expo": {
-    "name": "Notepad-md",
-    "slug": "Notepad-md",
-    "scheme": "mdeditor",
+    "name": "notepad-md",
+    "slug": "notepad-md",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.golpgelop.notepadmd",
       "infoPlist": {
         "CFBundleDocumentTypes": [
           {
-            "CFBundleTypeName": "Markdown File",
-            "LSHandlerRank": "Owner",
-            "LSItemContentTypes": [
-              "net.daringfireball.markdown",
-              "public.plain-text"
-            ],
-            "CFBundleTypeExtensions": [
-              "md",
-              "markdown",
-              "txt"
-            ]
+            "CFBundleTypeName": "Markdown Document",
+            "LSHandlerRank": "Default",
+            "LSItemContentTypes": ["com.golpgelop.notepadmd.markdown"],
+            "CFBundleTypeRole": "Viewer"
+          },
+          {
+            "CFBundleTypeName": "Text Document",
+            "LSHandlerRank": "Default",
+            "LSItemContentTypes": ["public.plain-text"],
+            "CFBundleTypeRole": "Viewer"
           }
         ],
-        "LSSupportsOpeningDocumentsInPlace": true,
-        "UIFileSharingEnabled": true,
-        "UISupportsDocumentBrowser": true
+        "UTImportedTypeDeclarations": [
+          {
+            "UTTypeIdentifier": "com.golpgelop.notepadmd.markdown",
+            "UTTypeTagSpecification": {
+              "public.filename-extension": ["md", "markdown", "mdown", "mkdn"],
+              "public.mime-type": ["text/markdown", "text/x-markdown"]
+            },
+            "UTTypeConformsTo": ["public.text"],
+            "UTTypeDescription": "Markdown Document"
+          }
+        ],
+        "LSSupportsOpeningDocumentsInPlace": true
       }
     },
     "android": {
-      "navigationBar": {
-        "backgroundColor": "#1a1a1a",
-        "buttonStyle": "dark"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       },
+      "package": "com.golpgelop.notepadmd",
       "intentFilters": [
         {
           "action": "VIEW",
+          "category": ["DEFAULT", "BROWSABLE"],
           "data": [
             {
-              "scheme": "content"
+              "scheme": "file",
+              "host": "*",
+              "pathPattern": ".*\\.md",
+              "mimeType": "text/markdown"
             },
             {
-              "scheme": "file"
+              "scheme": "file",
+              "host": "*",
+              "pathPattern": ".*\\.markdown",
+              "mimeType": "text/markdown"
+            },
+            {
+              "scheme": "file",
+              "host": "*",
+              "pathPattern": ".*\\.txt",
+              "mimeType": "text/plain"
+            },
+            {
+              "scheme": "content",
+              "mimeType": "text/markdown"
+            },
+            {
+              "scheme": "content",
+              "mimeType": "text/plain"
             }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "mimeType": [
-            "text/markdown",
-            "text/plain",
-            "text/x-markdown",
-            "application/octet-stream"
           ]
-        },
-        {
-          "action": "VIEW",
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "data": {
-            "scheme": "file",
-            "host": "*",
-            "pathPattern": ".*\\.md"
-          }
-        },
-        {
-          "action": "VIEW",
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "data": {
-            "scheme": "content",
-            "host": "*",
-            "pathPattern": ".*\\.md"
-          }
         }
-      ],
-      "package": "com.golpgelop.notepadmd"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "androidNavigationBar": {
-      "visible": "always",
-      "backgroundColor": "#434343ff",
-      "barStyle": "dark-content"
-    },
     "plugins": [
-      [
-        "expo-navigation-bar",
-        {
-          "enforceContrast": true,
-          "barStyle": "dark",
-          "visibility": "visible"
-        }
-      ],
       "expo-router"
     ],
-    "extra": {
-      "expo-navigation-bar": {
-        "enforceContrast": true,
-        "barStyle": "dark",
-        "visibility": "visible"
-      },
-      "router": {},
-      "eas": {
-        "projectId": "60165396-ba5b-4f25-8b54-5e67d0b49f2f"
-      }
-    }
+    "scheme": "notepad-md"
   }
 }
