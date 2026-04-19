@@ -1,14 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-export const numberBar = StyleSheet.create({ 
+export const numberBar = StyleSheet.create({
     container: {
-        position: 'absolute',
         paddingTop: 50,
-        top: 0,
-        left: 0,
-        bottom: 0,
         backgroundColor: '#595959ff',
-        width:40,
+        width: 40,
         alignItems: 'flex-end',
         paddingRight: 5,
     },
@@ -21,5 +17,5 @@ export const numberBar = StyleSheet.create({
         color: '#ffffffff',
     },
 
-    
+
 });

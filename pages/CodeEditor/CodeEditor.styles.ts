@@ -2,12 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const codeEditor = StyleSheet.create({ 
     container: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
         backgroundColor: '#626262ff',
+        flexDirection: 'row',
     }, 
 
     Button: {
@@ -25,5 +21,7 @@ export const codeEditor = StyleSheet.create({
         color: '#ffffffff',
     },
 
-    
+    scrollView: {
+        flex: 1,
+    }
 });
