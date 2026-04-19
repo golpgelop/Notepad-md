@@ -1,30 +1,22 @@
 import { View, Text, ScrollView } from 'react-native';
 import { notes } from './Notes.styles';
-import React from 'react';
+import React, { useContext } from 'react';
 
-type NoteType = {
-    id: number;
-    title: string;
-    description: string;
-};
+import  Note  from '../../../services/Note/Note';
+
+import { StoreContext } from '../../../App';
 
 const Notes: React.FC = () => {
-    const notesData: NoteType[] = [
-        { id: 1, title: 'Первая заметка', description: 'Содержание первой заметки' },
-        { id: 2, title: 'Вторая заметка', description: 'Содержание второй заметки' },
-        { id: 3, title: 'Третья заметка', description: 'Содержание третьей заметки' },
-        { id: 4, title: 'Первая заметка', description: 'Содержание первой заметки' },
-        { id: 5, title: 'Вторая заметка', description: 'Содержание второй заметки' },
-        { id: 6, title: 'Третья заметка', description: 'Содержание третьей заметки' },
-    ];
+    const store = useContext(StoreContext);
+    const notesData:Note[] = store.notes;
 
     return (
         <ScrollView>
             <View style={notes.container}>
-                {notesData.map(note => (
-                    <View key={note.id} style={notes.note}>
-                        <Text style={notes.head}>{note.title}</Text>
-                        <Text style={notes.description}>{note.description}</Text>
+                {notesData.map((note, index) => (
+                    <View key={index} style={notes.note}>
+                        <Text style={notes.head}>{note.name}</Text>
+                        <Text style={notes.description}>{note.data[0]}</Text>
                     </View>
                 ))}
             </View>

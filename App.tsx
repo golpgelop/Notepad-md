@@ -36,7 +36,6 @@ const App: React.FC = () => {
 
     const store = new Store;
 
-
     return (
 
         <View style={app.container}>

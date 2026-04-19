@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { TNote } from './type';
+import Note from '../Note/Note';
 
 class Store {
-    notes: TNote[] = [];
+    notes: Note[] = [];
     private readonly STORAGE_KEY = 'notes';
 
     constructor() {
@@ -27,14 +27,14 @@ class Store {
 
     //// Для работы с заметками ////
 
-    addNote = async (note: TNote): Promise<void | string> => {
+    addNote = async (note: Note): Promise<void | string> => {
         const exists = this.notes.some(n => n.name === note.name);
         if (exists) return 'Заметка уже существует';
         this.notes.push(note);
         await this.saveNotes();
     };
 
-    updateNote = async (updatedNote: TNote): Promise<void | string> => {
+    updateNote = async (updatedNote: Note): Promise<void | string> => {
         const index = this.notes.findIndex(n => n.name === updatedNote.name);
         if (index === -1) return 'Заметка не найдена'
         this.notes[index] = { ...this.notes[index], ...updatedNote };
