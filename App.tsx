@@ -7,8 +7,9 @@ import PageManager from './pages/PageManager';
 
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import Store from './services/Store/Store';
+
 
 export const StoreContext = React.createContext<Store>(null!);
 

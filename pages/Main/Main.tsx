@@ -1,14 +1,31 @@
-import { TouchableOpacity, View, Alert, TextInput } from 'react-native';
+import { TouchableOpacity, View, TextInput } from 'react-native';
 import { Image } from 'expo-image';
 import { main } from './Main.styles';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Notes from './Notes/Notes';
+import { StoreContext } from '../../App';
+
+import Note from '../../services/Note/Note';
+import Popup from '../../componets/Popup/Popup';
 
 const imageAdd = require('../../assets/addWhite.png');
 
 const Main: React.FC = () => {
 
+    const store = useContext(StoreContext);
+
     const [text, setText] = useState('');
+    const [newNote, setNewNote] = useState(false);
+
+    const addNoteHandler = () => {
+        setNewNote(true);
+
+    };
+
+    const addNewNoteHandler = (inputValue: string): void => {
+        store.addNote(new Note(inputValue, ['']));
+        setText('');
+    }
 
     return (
 
@@ -26,7 +43,7 @@ const Main: React.FC = () => {
                 />
             </View>
             <TouchableOpacity
-                onPress={() => Alert.alert('Нажато!')}
+                onPress={addNoteHandler}
                 style={main.buttonAdd}
             >
                 <Image
@@ -34,6 +51,12 @@ const Main: React.FC = () => {
                     source={imageAdd}
                 />
             </TouchableOpacity>
+
+            {newNote && <Popup data={{
+                text: 'Введите название:',
+                button: 'Добавить',
+                handler: addNewNoteHandler,
+            }} />}
         </View>
     );
 }
