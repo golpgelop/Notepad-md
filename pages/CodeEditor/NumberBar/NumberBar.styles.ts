@@ -11,6 +11,9 @@ export const numberBar = StyleSheet.create({
 
     lineNumber: {
         color: '#b4b4b4ff',
+        lineHeight: 20,
+        fontSize: 14, 
+        fontFamily: 'monospace',
     },
 
     activeLine: {

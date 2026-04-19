@@ -2,6 +2,7 @@
   "expo": {
     "name": "Notepad-md",
     "slug": "Notepad-md",
+    "scheme": "mdeditor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +14,68 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.golpgelop.notepadmd",
+      "infoPlist": {
+        "CFBundleDocumentTypes": [
+          {
+            "CFBundleTypeName": "Markdown File",
+            "LSHandlerRank": "Owner",
+            "LSItemContentTypes": [
+              "net.daringfireball.markdown",
+              "public.plain-text"
+            ],
+            "CFBundleTypeExtensions": ["md", "markdown", "txt"]
+          }
+        ],
+        "LSSupportsOpeningDocumentsInPlace": true,
+        "UIFileSharingEnabled": true,
+        "UISupportsDocumentBrowser": true
+      }
+    },
+    "android": {
+      "navigationBar": {
+        "backgroundColor": "#1a1a1a",
+        "buttonStyle": "dark"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "content"
+            },
+            {
+              "scheme": "file"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"],
+          "mimeType": [
+            "text/markdown",
+            "text/plain",
+            "text/x-markdown",
+            "application/octet-stream"
+          ]
+        },
+        {
+          "action": "VIEW",
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": {
+            "scheme": "file",
+            "host": "*",
+            "pathPattern": ".*\\.md"
+          }
+        },
+        {
+          "action": "VIEW",
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": {
+            "scheme": "content",
+            "host": "*",
+            "pathPattern": ".*\\.md"
+          }
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -22,12 +84,6 @@
       "visible": "always",
       "backgroundColor": "#434343ff",
       "barStyle": "dark-content"
-    },
-    "android": {
-      "navigationBar": {
-        "backgroundColor": "#1a1a1a",
-        "buttonStyle": "dark"
-      }
     },
     "plugins": [
       [

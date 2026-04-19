@@ -18,7 +18,7 @@ export interface IBasePage {
 
 const PageManager: React.FC = () => {
 
-    const [page, setPage] = useState<PAGES>(PAGES.MAIN);
+    const [page, setPage] = useState<PAGES>(PAGES.CODE_EDITOR);
     const isKeyboardVisible = useKeyboard();
 
     return (

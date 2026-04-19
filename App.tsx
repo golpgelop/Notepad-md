@@ -9,11 +9,14 @@ import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useEffect } from 'react';
 import Store from './services/Store/Store';
+import { useFileHandler } from './hooks/useFileHandler';
 
 
 export const StoreContext = React.createContext<Store>(null!);
 
 const App: React.FC = () => {
+
+    const { fileContent, fileName, isLoading } = useFileHandler();
 
     useEffect(() => {
         const setupNavigationBar = async () => {

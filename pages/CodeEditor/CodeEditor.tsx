@@ -13,7 +13,7 @@ const CodeEditor: React.FC = () => {
     const [text, setText] = useState('');
     const isKeyboardVisible = useKeyboard();
 
-    const primer = "# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2";
+    let primer = "# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет";
     const codeArr = primer.split('\n');
 
     return (
@@ -22,7 +22,7 @@ const CodeEditor: React.FC = () => {
 
                 {isKeyboardVisible && <PanelDown />}
                 <NumberBar numberLen={codeArr.length} currentLine={1} />
-                <TextBar codeArr={codeArr} currentLine={1} />
+                <TextBar code={primer} currentLine={1} />
 
             </View>
         </ScrollView>

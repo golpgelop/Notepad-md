@@ -1,30 +1,23 @@
-import { View, Text } from 'react-native';
+import { View, TextInput } from 'react-native';
 import React from 'react';
 
 import { textBar } from './TextBar.styles';
 
 interface INumberBarProps {
-    codeArr: string[];
-    currentLine?: number;
+    code: string;
+    currentLine: number;
 }
 
-const TextBar: React.FC<INumberBarProps> = ({ codeArr, currentLine }) => {
-
-    const lines = Array.from({ length: codeArr.length }, (_, i) => i + 1);
+const TextBar: React.FC<INumberBarProps> = ({ code, currentLine = 1 }) => {
 
     return (
         <View style={textBar.container}>
-            {lines.map((lineNum) => (
-                <Text
-                    key={lineNum}
-                    style={[
-                        textBar.lineNumber,
-                        currentLine === lineNum && textBar.activeLine
-                    ]}
-                >
-                    {codeArr[lineNum - 1]}
-                </Text>
-            ))}
+            <TextInput
+                style={textBar.lineNumber}
+                multiline={true}
+                value={code}
+            />
+
         </View>
     );
 }

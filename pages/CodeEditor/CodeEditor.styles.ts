@@ -1,9 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { height: screenHeight } = Dimensions.get('window');
 
 export const codeEditor = StyleSheet.create({ 
     container: {
         backgroundColor: '#626262ff',
         flexDirection: 'row',
+        minHeight: screenHeight,
     }, 
 
     Button: {
@@ -23,5 +26,6 @@ export const codeEditor = StyleSheet.create({
 
     scrollView: {
         flex: 1,
+        
     }
 });
