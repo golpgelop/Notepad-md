@@ -4,7 +4,7 @@ export const notes = StyleSheet.create({
     container: {
         paddingBottom: 200
     },
-    
+
     note: {
         backgroundColor: '#393939ff',
         top: 130,
@@ -34,5 +34,25 @@ export const notes = StyleSheet.create({
         right: 20,
         top: 40
     },
+
+    deleteNote: {
+        position: 'absolute',
+        color: '#ffffffff',
+        right: 10,
+        top: 10,
+        borderColor: '#ffffffff',
+        borderWidth: 3,
+        height: 50,
+        width: 50,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    deleteNoteText: {
+        color: '#ffffffff',
+        fontSize: 20,
+    }
+
 
 });
