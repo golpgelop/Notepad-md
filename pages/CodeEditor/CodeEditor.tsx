@@ -9,26 +9,30 @@ import TextBar from './TextBar/TextBar';
 import { useKeyboard } from '../../hooks/useKeyboard';
 
 const CodeEditor: React.FC = () => {
+  const primer = "# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет";
+  const [text, setText] = useState(primer);
 
-    const [text, setText] = useState('');
-    const isKeyboardVisible = useKeyboard();
+  const isKeyboardVisible = useKeyboard();
 
-    let primer = "# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет";
-    const codeArr = primer.split('\n');
+  const codeArr = text.split('\n');
 
-    return (
-        <ScrollView style={codeEditor.scrollView}>
-            <View style={codeEditor.container}>
+  const handleChangeText = (newText: string) => {
+    setText(newText);
+  };
 
-                {isKeyboardVisible && <PanelDown />}
-                <NumberBar numberLen={codeArr.length} currentLine={1} />
-                <TextBar code={primer} currentLine={1} />
-
-            </View>
-        </ScrollView>
-    );
-}
+  return (
+    <ScrollView style={codeEditor.scrollView}>
+      <View style={codeEditor.container}>
+        {isKeyboardVisible && <PanelDown />}
+        <NumberBar numberLen={codeArr.length} currentLine={1} />
+        <TextBar
+          code={text}            
+          onChangeText={handleChangeText}
+          currentLine={1}
+        />
+      </View>
+    </ScrollView>
+  );
+};
 
 export default CodeEditor;
-
-

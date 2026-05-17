@@ -3,25 +3,23 @@ import React from 'react';
 
 import { textBar } from './TextBar.styles';
 
-interface INumberBarProps {
-    code: string;
-    currentLine: number;
+interface ITextBarProps {
+  code: string;
+  currentLine: number;
+  onChangeText: (text: string) => void;   // добавляем колбэк
 }
 
-const TextBar: React.FC<INumberBarProps> = ({ code, currentLine = 1 }) => {
-
-    return (
-        <View style={textBar.container}>
-            <TextInput
-                style={textBar.lineNumber}
-                multiline={true}
-                value={code}
-            />
-
-        </View>
-    );
-}
+const TextBar: React.FC<ITextBarProps> = ({ code, currentLine = 1, onChangeText }) => {
+  return (
+    <View style={textBar.container}>
+      <TextInput
+        style={textBar.lineNumber}
+        multiline={true}
+        value={code}                  
+        onChangeText={onChangeText}     
+      />
+    </View>
+  );
+};
 
 export default TextBar;
-
-
