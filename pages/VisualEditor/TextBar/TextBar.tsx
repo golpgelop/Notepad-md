@@ -1,7 +1,8 @@
 // TextBar/TextBar.tsx
-import React, { useRef, useEffect } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import Markdown from 'react-native-markdown-display';
+import { textbar } from './TextBar.styles';
 
 interface ITextBarProps {
   code: string;
@@ -25,11 +26,11 @@ const TextBar: React.FC<ITextBarProps> = ({
   inputRef,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={textbar.container}>
       {editing ? (
         <TextInput
           ref={inputRef}
-          style={[styles.input, { fontSize }]}
+          style={[textbar.input, { fontSize }]}
           multiline
           value={code}
           onChangeText={onChangeText}
@@ -41,33 +42,21 @@ const TextBar: React.FC<ITextBarProps> = ({
         />
       ) : (
         <TouchableOpacity
-          style={styles.preview}
+          style={textbar.preview}
           activeOpacity={0.8}
           onPress={onPressPreview}
         >
-          <Markdown style={{ body: { fontSize } }}>{code || ' '}</Markdown>
+          <Markdown style={
+            { body: { 
+              color: '#b4b4b4ff',
+              fontSize
+             } }
+          }>{code || ' '}</Markdown>
         </TouchableOpacity>
       )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#3c3c3cff',
-    padding: 10,
-  },
-  input: {
-    color: '#b4b4b4ff',
-    fontFamily: 'monospace',
-    flex: 1,
-    textAlignVertical: 'top',
-    padding: 0,
-  },
-  preview: {
-    flex: 1,
-  },
-});
 
 export default TextBar;
