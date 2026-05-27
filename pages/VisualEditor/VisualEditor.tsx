@@ -5,12 +5,11 @@ import PanelUp from './PanelUp/PanelUp';
 import PanelDown from './PanelDown/PanelDown'
 import TextBar from './TextBar/TextBar';
 import { useKeyboard } from '../../hooks/useKeyboard';
+import { IText } from '../PageManager';
 
 const FONT_SIZES = [12, 16, 20, 24];
 
-const VisualEditor: React.FC = () => {
-  const primer = '# Welcome to StackEdit!\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2';
-  const [text, setText] = useState(primer);
+const VisualEditor: React.FC<IText> = ({text, setText}) => {
   const [editing, setEditing] = useState(false);
   const [fontSize, setFontSize] = useState(16);
 

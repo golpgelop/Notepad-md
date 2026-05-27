@@ -16,7 +16,15 @@ export interface IBasePage {
     setPage: (name: PAGES) => void;
 }
 
+export interface IText {
+    setText: (text: string) => void;
+    text: string;
+}
+
 const PageManager: React.FC = () => {
+
+    const primer = '# Welcome to StackEdit!\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2';
+    const [text, setText] = useState(primer);
 
     const [page, setPage] = useState<PAGES>(PAGES.CODE_EDITOR);
     const isKeyboardVisible = useKeyboard();
@@ -24,9 +32,9 @@ const PageManager: React.FC = () => {
     return (
         <>
             {page === PAGES.MAIN && <Main />}
-            {page === PAGES.VISUAL_EDITOR && <VisualEditor />}
-            {page === PAGES.CODE_EDITOR && <CodeEditor />}
-            
+            {page === PAGES.VISUAL_EDITOR && <VisualEditor setText={setText} text={text}/>}
+            {page === PAGES.CODE_EDITOR && <CodeEditor setText={setText} text={text}/>}
+
             {!isKeyboardVisible && <UI setPage={setPage} />}
         </>
     );

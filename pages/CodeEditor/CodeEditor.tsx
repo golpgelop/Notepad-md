@@ -7,10 +7,9 @@ import NumberBar from './NumberBar/NumberBar';
 import TextBar from './TextBar/TextBar';
 
 import { useKeyboard } from '../../hooks/useKeyboard';
+import { IText } from '../PageManager';
 
-const CodeEditor: React.FC = () => {
-  const primer = "# Заголовок\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2# Заголовок\n\nПривет";
-  const [text, setText] = useState(primer);
+const CodeEditor: React.FC<IText> = ({text, setText}) => {
 
   const isKeyboardVisible = useKeyboard();
 
