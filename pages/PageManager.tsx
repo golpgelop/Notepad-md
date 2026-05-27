@@ -31,7 +31,7 @@ const PageManager: React.FC = () => {
 
     return (
         <>
-            {page === PAGES.MAIN && <Main />}
+            {page === PAGES.MAIN && <Main setText={setText} text={text}/>}
             {page === PAGES.VISUAL_EDITOR && <VisualEditor setText={setText} text={text}/>}
             {page === PAGES.CODE_EDITOR && <CodeEditor setText={setText} text={text}/>}
 

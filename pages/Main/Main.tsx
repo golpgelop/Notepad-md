@@ -7,14 +7,13 @@ import { StoreContext } from '../../App';
 
 import Note from '../../services/Note/Note';
 import Popup from '../../componets/Popup/Popup';
+import { IText } from '../PageManager';
 
 const imageAdd = require('../../assets/addWhite.png');
 
-const Main: React.FC = () => {
+const Main: React.FC<IText> = ({text, setText}) => {
 
     const store = useContext(StoreContext);
-
-    const [text, setText] = useState('');
     const [newNote, setNewNote] = useState(false);
 
     const addNoteHandler = () => {
