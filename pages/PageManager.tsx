@@ -52,21 +52,13 @@ const PageManager: React.FC = () => {
 
     useEffect(() => {
         const interval = 2000; 
-        const maxIterations = 5;
-        let iterations = 0;
         
 
         const timer = setInterval(() => {
-            if (iterations >= maxIterations) {
-                clearInterval(timer);
-                return;
-            }
-
             if (selectedNoteRef.current != null) {
                 store.updateNote(selectedNoteRef.current, textRef.current);
             }
-
-            iterations++;
+            
         }, interval);
 
         return () => clearInterval(timer);

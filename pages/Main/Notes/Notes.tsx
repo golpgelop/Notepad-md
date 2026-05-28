@@ -55,7 +55,7 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
                             </TouchableOpacity>
 
                             <Text style={notes.head}>{note.name}</Text>
-                            <Text style={notes.description}>{note.text}</Text>
+                            <Text style={notes.description}>{note.text.slice(0,80).replaceAll("\n", " ")+'...'}</Text>
                         </View>
                     );
                 })}

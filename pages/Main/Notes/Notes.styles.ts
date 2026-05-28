@@ -30,9 +30,10 @@ export const notes = StyleSheet.create({
     description: {
         position: 'absolute',
         color: '#ffffffff',
-        left: 20,
-        fontSize: 20,
-        top: 20
+        left: 15,
+        fontSize: 18,
+        top: 35,
+        right: 70,
     },
 
     deleteNote: {
