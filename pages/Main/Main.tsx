@@ -5,7 +5,6 @@ import React, { useContext, useState } from 'react';
 import Notes from './Notes/Notes';
 import { StoreContext } from '../../App';
 import Note from '../../services/Note/Note';
-import { IText } from '../PageManager';
 
 const imageAdd = require('../../assets/addWhite.png');
 
@@ -23,10 +22,6 @@ const Main: React.FC = () => {
     store.addNote(newNote).then(() => {
       setName('');
     });
-    // Если addNote вернул ошибку (например, дубликат), alert уже показан внутри контекста,
-    // и мы всё равно очищаем поле для удобства (или можно не очищать, если ошибка).
-    // Чтобы не очищать при ошибке, можно сделать addNote возвращать boolean.
-    // Упростим: очищаем в любом случае, пользователь увидит alert.
   };
 
   return (
@@ -39,7 +34,7 @@ const Main: React.FC = () => {
           placeholderTextColor="#ffffffff"
           value={name}
           onChangeText={setName}
-          onSubmitEditing={addNoteHandler} // добавил возможность добавлять по Enter
+          onSubmitEditing={addNoteHandler}
         />
       </View>
       <TouchableOpacity onPress={addNoteHandler} style={main.buttonAdd}>

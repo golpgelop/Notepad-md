@@ -49,6 +49,36 @@ export const notes = StyleSheet.create({
         justifyContent: 'center',
     },
 
+    setNote: {
+        backgroundColor: '#6dee96ff',
+        position: 'absolute',
+        color: '#ffffffff',
+        right: 10,
+        top: 70,
+        borderColor: '#ffffffff',
+        borderWidth: 3,
+        height: 50,
+        width: 50,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    unSetNote: {
+        backgroundColor: '#ee6d9eff',
+        position: 'absolute',
+        color: '#ffffffff',
+        right: 10,
+        top: 70,
+        borderColor: '#ffffffff',
+        borderWidth: 3,
+        height: 50,
+        width: 50,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     deleteNoteText: {
         color: '#ffffffff',
         fontSize: 20,
