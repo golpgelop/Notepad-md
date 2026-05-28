@@ -26,7 +26,7 @@ const PageManager: React.FC = () => {
     const primer = '# Welcome to StackEdit!\n\nПривет, **мир**!\n\n- пункт 1\n- пункт 2';
     const [text, setText] = useState(primer);
 
-    const [page, setPage] = useState<PAGES>(PAGES.CODE_EDITOR);
+    const [page, setPage] = useState<PAGES>(PAGES.MAIN);
     const isKeyboardVisible = useKeyboard();
 
     return (
