@@ -6,15 +6,14 @@ import { app } from './App.styles';
 import PageManager from './pages/PageManager';
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
-import { useNotes } from './hooks/useNotes'; // наш модуль
+import { useNotes } from './hooks/useNotes';
 
 export const StoreContext = React.createContext<ReturnType<typeof useNotes>>(null!);
 
 const AppContent: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const store = useNotes(); // вся логика здесь, но она инкапсулирована
+  const store = useNotes(); 
 
-  // настройка панели навигации (без изменений)
   useEffect(() => {
     const setupNavigationBar = async () => {
       await NavigationBar.setBackgroundColorAsync('#000000');
