@@ -6,17 +6,15 @@ import { app } from './App.styles';
 import PageManager from './pages/PageManager';
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
-import Store from './services/Store/Store';
-import { useFileHandler } from './hooks/useFileHandler';
+import { useNotes } from './hooks/useNotes'; // наш модуль
 
-export const StoreContext = React.createContext<Store>(null!);
+export const StoreContext = React.createContext<ReturnType<typeof useNotes>>(null!);
 
 const AppContent: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const { fileContent, fileName, isLoading } = useFileHandler();
-  const store = new Store();
+  const store = useNotes(); // вся логика здесь, но она инкапсулирована
 
-  // настройка панели навигации
+  // настройка панели навигации (без изменений)
   useEffect(() => {
     const setupNavigationBar = async () => {
       await NavigationBar.setBackgroundColorAsync('#000000');
