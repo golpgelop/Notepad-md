@@ -8,12 +8,21 @@ import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useNotes } from './hooks/useNotes';
 import { useFileHandler } from './hooks/useFileHandler';
+import Note from './services/Note/Note';
 
 export const StoreContext = React.createContext<ReturnType<typeof useNotes>>(null!);
 
 const AppContent: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const store = useNotes(); 
+  const store = useNotes();
+  const { fileContent, fileName, isLoading } = useFileHandler();
+
+  useEffect(() => {
+    if (fileContent && fileName) {
+      const note = new Note(fileName, fileContent);
+      store.addNote(note);
+    }
+  }, [fileContent, fileName]);
 
   useEffect(() => {
     const setupNavigationBar = async () => {
