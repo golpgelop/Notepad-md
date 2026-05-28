@@ -9,18 +9,19 @@ import { IText } from '../PageManager';
 
 const imageAdd = require('../../assets/addWhite.png');
 
-const Main: React.FC<IText> = ({ text, setText }) => {
+const Main: React.FC = () => {
   const store = useContext(StoreContext);
+  const [name, setName] = useState('');
 
   const addNoteHandler = () => {
-    const trimmed = text.trim();
+    const trimmed = name.trim();
     if (!trimmed) {
       Alert.alert('Введите название заметки');
       return;
     }
     const newNote = new Note(trimmed, ['']);
     store.addNote(newNote).then(() => {
-      setText('');
+      setName('');
     });
     // Если addNote вернул ошибку (например, дубликат), alert уже показан внутри контекста,
     // и мы всё равно очищаем поле для удобства (или можно не очищать, если ошибка).
@@ -36,8 +37,8 @@ const Main: React.FC<IText> = ({ text, setText }) => {
           style={main.inputSearch}
           placeholder="Введите название заметки"
           placeholderTextColor="#ffffffff"
-          value={text}
-          onChangeText={setText}
+          value={name}
+          onChangeText={setName}
           onSubmitEditing={addNoteHandler} // добавил возможность добавлять по Enter
         />
       </View>

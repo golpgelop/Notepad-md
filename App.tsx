@@ -7,6 +7,7 @@ import PageManager from './pages/PageManager';
 import * as NavigationBar from 'expo-navigation-bar';
 import * as SystemUI from 'expo-system-ui';
 import { useNotes } from './hooks/useNotes';
+import { useFileHandler } from './hooks/useFileHandler';
 
 export const StoreContext = React.createContext<ReturnType<typeof useNotes>>(null!);
 
