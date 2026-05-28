@@ -2,60 +2,66 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { notes } from './Notes.styles';
 import React, { useContext, useState, useEffect } from 'react';
 import { StoreContext } from '../../../App';
+import { ISelectNode } from '../../PageManager';
 
-const Notes: React.FC = () => {
-  const store = useContext(StoreContext);
-  const [selectedNote, setSelectedNote] = useState<string | null>(null);
+const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }) => {
+    const store = useContext(StoreContext);
 
-  useEffect(() => {
-    if (store.notes.length > 0 && !selectedNote) {
-      setSelectedNote(store.notes[0].name);
-    } else if (store.notes.length > 0 && selectedNote) {
-      const stillExists = store.notes.some(n => n.name === selectedNote);
-      if (!stillExists) {
-        setSelectedNote(store.notes[0].name);
-      }
-    } else if (store.notes.length === 0) {
-      setSelectedNote(null);
-    }
-  }, [store.notes, selectedNote]);
 
-  const deleteNote = (name: string) => {
-    store.deleteNote(name);
-  };
+    useEffect(() => {
+        if (store.notes.length > 0 && !selectedNote) {
+            setSelectedNote(store.notes[0].name);
+            setText(store.notes[0].text);
+        } else if (store.notes.length > 0 && selectedNote) {
+            const stillExists = store.notes.some(n => n.name === selectedNote);
+            if (!stillExists) {
+                setSelectedNote(store.notes[0].name);
+                setText(store.notes[0].text);
+            }
+        } else if (store.notes.length === 0) {
+            setSelectedNote(null);
+            setText('');
+        }
+    }, [store.notes, selectedNote]);
 
-  const setNote = (name: string) => {
-    setSelectedNote(name);
-  };
+    const deleteNote = (name: string) => {
+        store.deleteNote(name);
+    };
 
-  return (
-    <ScrollView>
-      <View style={notes.container}>
-        {store.notes.map((note, index) => {
-          const isSelected = note.name === selectedNote;
-          return (
-            <View key={index} style={notes.note}>
-              <TouchableOpacity
-                onPress={() => deleteNote(note.name)}
-                style={notes.deleteNote}
-              >
-                <Text style={notes.deleteNoteText}>✖</Text>
-              </TouchableOpacity>
+    const setNote = (name: string) => {
+        setSelectedNote(name);
+        const note = store.notes.find(note => note.name === name);
+        if (note != undefined) { setText(note.text); } else { setText('') }
+    };
 
-              <TouchableOpacity
-                onPress={() => setNote(note.name)}
-                style={isSelected ? notes.setNote : notes.unSetNote}
-              >
-              </TouchableOpacity>
+    return (
+        <ScrollView>
+            <View style={notes.container}>
+                {store.notes.map((note, index) => {
+                    const isSelected = note.name === selectedNote;
+                    return (
+                        <View key={index} style={notes.note}>
+                            <TouchableOpacity
+                                onPress={() => deleteNote(note.name)}
+                                style={notes.deleteNote}
+                            >
+                                <Text style={notes.deleteNoteText}>✖</Text>
+                            </TouchableOpacity>
 
-              <Text style={notes.head}>{note.name}</Text>
-              <Text style={notes.description}>{note.data[0]}</Text>
+                            <TouchableOpacity
+                                onPress={() => setNote(note.name)}
+                                style={isSelected ? notes.setNote : notes.unSetNote}
+                            >
+                            </TouchableOpacity>
+
+                            <Text style={notes.head}>{note.name}</Text>
+                            <Text style={notes.description}>{note.text}</Text>
+                        </View>
+                    );
+                })}
             </View>
-          );
-        })}
-      </View>
-    </ScrollView>
-  );
+        </ScrollView>
+    );
 };
 
 export default Notes;

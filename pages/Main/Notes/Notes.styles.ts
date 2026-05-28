@@ -31,8 +31,8 @@ export const notes = StyleSheet.create({
         position: 'absolute',
         color: '#ffffffff',
         left: 20,
-        right: 20,
-        top: 40
+        fontSize: 20,
+        top: 20
     },
 
     deleteNote: {

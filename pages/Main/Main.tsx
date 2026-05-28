@@ -5,10 +5,11 @@ import React, { useContext, useState } from 'react';
 import Notes from './Notes/Notes';
 import { StoreContext } from '../../App';
 import Note from '../../services/Note/Note';
+import { ISelectNode } from '../PageManager';
 
 const imageAdd = require('../../assets/addWhite.png');
 
-const Main: React.FC = () => {
+const Main: React.FC<ISelectNode> = ({selectedNote, setSelectedNote, setText}) => {
   const store = useContext(StoreContext);
   const [name, setName] = useState('');
 
@@ -18,7 +19,7 @@ const Main: React.FC = () => {
       Alert.alert('Введите название заметки');
       return;
     }
-    const newNote = new Note(trimmed, ['']);
+    const newNote = new Note(trimmed, '');
     store.addNote(newNote).then(() => {
       setName('');
     });
@@ -26,7 +27,7 @@ const Main: React.FC = () => {
 
   return (
     <View style={main.container}>
-      <Notes />
+      <Notes setText={setText} selectedNote={selectedNote} setSelectedNote={setSelectedNote}/>
       <View style={main.cut}>
         <TextInput
           style={main.inputSearch}

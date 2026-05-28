@@ -1,9 +1,9 @@
 class Note {
     name: string;
-    data: string[];
-    constructor(name: string, data: string[]) {
+    text: string;
+    constructor(name: string, text: string) {
         this.name = name;
-        this.data = data;
+        this.text = text;
     }
 }
 export default Note;
