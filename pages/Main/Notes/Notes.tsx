@@ -4,11 +4,20 @@ import React, { useContext, useState, useEffect } from 'react';
 import { StoreContext } from '../../../App';
 import { ISelectNode } from '../../PageManager';
 import { Image } from 'expo-image';
+import { useFileSharer } from '../../../hooks/useFileSharer';
 
 const imageSend = require('../../../assets/send.png');
 
 const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }) => {
     const store = useContext(StoreContext);
+
+    const { shareFile } = useFileSharer();
+    const sendNote = async (name: string, text: string) => {
+        await shareFile({
+            title: name,
+            content: text
+        });
+    };
 
 
     useEffect(() => {
@@ -37,13 +46,6 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
         if (note != undefined) { setText(note.text); } else { setText('') }
     };
 
-    const sendNote = (name: string) => {
-        const note = store.notes.find(note => note.name === name);
-        if (note != undefined) { 
-            
-        } 
-    }
-
     return (
         <ScrollView>
             <View style={notes.container}>
@@ -65,7 +67,7 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                                onPress={() => sendNote(note.name)}
+                                onPress={() => sendNote(note.name, note.text)}
                                 style={notes.sendNote}
                             >
                                 <Image style={notes.buttonSend} source={imageSend} />
