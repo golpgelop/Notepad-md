@@ -43,8 +43,8 @@ export const notes = StyleSheet.create({
         top: 10,
         borderColor: '#ffffffff',
         borderWidth: 3,
-        height: 50,
-        width: 50,
+        height: 40,
+        width: 40,
         borderRadius: 100,
         alignItems: 'center',
         justifyContent: 'center',
@@ -55,11 +55,11 @@ export const notes = StyleSheet.create({
         position: 'absolute',
         color: '#ffffffff',
         right: 10,
-        top: 70,
+        top: 55,
         borderColor: '#ffffffff',
         borderWidth: 3,
-        height: 50,
-        width: 50,
+        height: 40,
+        width: 40,
         borderRadius: 100,
         alignItems: 'center',
         justifyContent: 'center',
@@ -70,11 +70,11 @@ export const notes = StyleSheet.create({
         position: 'absolute',
         color: '#ffffffff',
         right: 10,
-        top: 70,
+        top: 55,
         borderColor: '#ffffffff',
         borderWidth: 3,
-        height: 50,
-        width: 50,
+        height: 40,
+        width: 40,
         borderRadius: 100,
         alignItems: 'center',
         justifyContent: 'center',
@@ -83,7 +83,26 @@ export const notes = StyleSheet.create({
     deleteNoteText: {
         color: '#ffffffff',
         fontSize: 20,
+    },
+
+
+    sendNote: {
+        backgroundColor: '#7fb2faff',
+        position: 'absolute',
+        color: '#ffffffff',
+        right: 10,
+        top: 100,
+        borderColor: '#ffffffff',
+        borderWidth: 3,
+        height: 40,
+        width: 40,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    buttonSend: {
+        height: 30,
+        width: 30,
     }
-
-
 });

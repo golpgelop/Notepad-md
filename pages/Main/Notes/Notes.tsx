@@ -3,6 +3,9 @@ import { notes } from './Notes.styles';
 import React, { useContext, useState, useEffect } from 'react';
 import { StoreContext } from '../../../App';
 import { ISelectNode } from '../../PageManager';
+import { Image } from 'expo-image';
+
+const imageSend = require('../../../assets/send.png');
 
 const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }) => {
     const store = useContext(StoreContext);
@@ -34,6 +37,13 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
         if (note != undefined) { setText(note.text); } else { setText('') }
     };
 
+    const sendNote = (name: string) => {
+        const note = store.notes.find(note => note.name === name);
+        if (note != undefined) { 
+            
+        } 
+    }
+
     return (
         <ScrollView>
             <View style={notes.container}>
@@ -54,8 +64,15 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
                             >
                             </TouchableOpacity>
 
+                            <TouchableOpacity
+                                onPress={() => sendNote(note.name)}
+                                style={notes.sendNote}
+                            >
+                                <Image style={notes.buttonSend} source={imageSend} />
+                            </TouchableOpacity>
+
                             <Text style={notes.head}>{note.name}</Text>
-                            <Text style={notes.description}>{note.text.slice(0,80).replaceAll("\n", " ")+'...'}</Text>
+                            <Text style={notes.description}>{note.text.slice(0, 80).replaceAll("\n", " ") + '...'}</Text>
                         </View>
                     );
                 })}
