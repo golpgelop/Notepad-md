@@ -10,7 +10,7 @@ interface IPanelUpProps {
   onLinePress: () => void;
   onViewPress: () => void;
   onSizePress: () => void;
-  onSavePress: () => void;   // новая
+  onSavePress: () => void;
 }
 
 const PanelUp: React.FC<IPanelUpProps> = ({
