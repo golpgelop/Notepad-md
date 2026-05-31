@@ -1,4 +1,3 @@
-// PanelUp.tsx
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { panelup } from './PanelUp.styles';

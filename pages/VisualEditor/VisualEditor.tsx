@@ -1,4 +1,3 @@
-// VisualEditor.tsx
 import React, { useState, useRef, useCallback } from 'react';
 import { View, TextInput, Vibration } from 'react-native';
 import { visualEditor } from './VisualEditor.styles';
