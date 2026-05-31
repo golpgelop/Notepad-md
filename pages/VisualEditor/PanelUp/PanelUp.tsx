@@ -1,3 +1,4 @@
+// PanelUp.tsx
 import React from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { panelup } from './PanelUp.styles';
@@ -10,6 +11,7 @@ interface IPanelUpProps {
   onLinePress: () => void;
   onViewPress: () => void;
   onSizePress: () => void;
+  onSizeLongPress: () => void;
   onSavePress: () => void;
 }
 
@@ -21,6 +23,7 @@ const PanelUp: React.FC<IPanelUpProps> = ({
   onLinePress,
   onViewPress,
   onSizePress,
+  onSizeLongPress,
   onSavePress,
 }) => {
   return (
@@ -37,7 +40,12 @@ const PanelUp: React.FC<IPanelUpProps> = ({
         <Text style={panelup.ButtonText}>{viewValue}</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={panelup.Button} onPress={onSizePress}>
+      <TouchableOpacity
+        style={panelup.Button}
+        onPress={onSizePress}
+        onLongPress={onSizeLongPress}
+        delayLongPress={500}
+      >
         <Text style={panelup.ButtonText}>Aa: {size}</Text>
       </TouchableOpacity>
 

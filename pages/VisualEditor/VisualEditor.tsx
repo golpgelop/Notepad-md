@@ -1,5 +1,6 @@
+// VisualEditor.tsx
 import React, { useState, useRef, useCallback } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Vibration } from 'react-native';
 import { visualEditor } from './VisualEditor.styles';
 import PanelUp from './PanelUp/PanelUp';
 import PanelDown from './PanelDown/PanelDown';
@@ -7,11 +8,11 @@ import TextBar from './TextBar/TextBar';
 import { useKeyboard } from '../../hooks/useKeyboard';
 import { IText } from '../PageManager';
 
-const FONT_SIZES = [12, 16, 20, 24];
+const HEADING_LEVELS = [1, 2, 3, 4];
 
 const VisualEditor: React.FC<IText> = ({ text, setText }) => {
   const [editing, setEditing] = useState(false);
-  const [fontSize, setFontSize] = useState(16);
+  const [headingLevel, setHeadingLevel] = useState(1);
 
   const markArray = ['mark', '1.', '-', '•'];
   const [markIndex, setMarkIndex] = useState(0);
@@ -110,9 +111,15 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
   };
 
   const handleSizePress = () => {
-    const currentIdx = FONT_SIZES.indexOf(fontSize);
-    const nextIdx = (currentIdx + 1) % FONT_SIZES.length;
-    setFontSize(FONT_SIZES[nextIdx]);
+    const hashes = '#'.repeat(headingLevel) + ' ';
+    insertText(hashes);
+  };
+
+  const handleSizeLongPress = () => {
+    const currentIdx = HEADING_LEVELS.indexOf(headingLevel);
+    const nextIdx = (currentIdx + 1) % HEADING_LEVELS.length;
+    setHeadingLevel(HEADING_LEVELS[nextIdx]);
+    Vibration.vibrate(100);
   };
 
   const handleChangeText = useCallback(
@@ -171,18 +178,17 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
     [editing, markIndex, markArray, setText]
   );
 
-  const sizeIndex = FONT_SIZES.indexOf(fontSize) + 1;
-
   return (
     <View style={visualEditor.container}>
       <PanelUp
         markValue={markArray[markIndex]}
         viewValue={viewArray[viewIndex]}
-        size={sizeIndex}
+        size={headingLevel}
         onMarkPress={handleMarkPress}
         onLinePress={handleLinePress}
         onViewPress={handleViewPress}
         onSizePress={handleSizePress}
+        onSizeLongPress={handleSizeLongPress}
         onSavePress={handleSavePress}
       />
       <View style={{ marginTop: 110, flex: 1 }}>
@@ -190,7 +196,7 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
           code={text}
           onChangeText={handleChangeText}
           editing={editing}
-          fontSize={fontSize}
+          fontSize={16}
           onPressPreview={handlePressPreview}
           selectionRef={selectionRef}
           inputRef={inputRef}
