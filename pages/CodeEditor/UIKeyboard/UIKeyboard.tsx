@@ -6,7 +6,7 @@ interface IUIKeyboardProps {
     onRight: () => void;
     onUp: () => void;
     onDown: () => void;
-    // остальные можно добавить позже
+    
     onPut?: () => void;
     onPast?: () => void;
     onCopy?: () => void;
