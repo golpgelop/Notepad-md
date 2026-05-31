@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { ui } from './UIKeyboard.styles';
 
 
-const UI: React.FC = () => {
+const UIKeyboard: React.FC = () => {
 
     const handlePressLeft = () => {
     }
@@ -45,4 +45,4 @@ const UI: React.FC = () => {
     );
 }
 
-export default UI;
+export default UIKeyboard;
