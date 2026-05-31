@@ -6,7 +6,6 @@ import VisualEditor from './VisualEditor/VisualEditor';
 import CodeEditor from './CodeEditor/CodeEditor';
 
 import UI from './UI/UI';
-import UIKeyboard from './UIKeyboard/UIKeyboard';
 
 import { StoreContext } from '../App';
 
@@ -72,7 +71,6 @@ const PageManager: React.FC = () => {
             {page === PAGES.CODE_EDITOR && <CodeEditor setText={setText} text={text} />}
 
             {!isKeyboardVisible && <UI setPage={setPage} />}
-            {isKeyboardVisible && <UIKeyboard/>}
         </>
     );
 }
