@@ -28,18 +28,15 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
   const handleSavePress = () => setEditing(false);
 
   const insertText = useCallback(
-    (before: string, after: string = '', placeholder: string = '') => {
+    (before: string, after: string = '', placeholder: string = '', cursorOffset?: number) => {
       if (!editing) return;
       const { start, end } = selectionRef.current;
       const selectedText = text.substring(start, end);
+      const content = selectedText || placeholder;
       const newText =
-        text.substring(0, start) +
-        before +
-        (selectedText || placeholder) +
-        after +
-        text.substring(end);
+        text.substring(0, start) + before + content + after + text.substring(end);
       setText(newText);
-      const cursorPos = start + before.length + (selectedText || placeholder).length;
+      const cursorPos = start + (cursorOffset !== undefined ? cursorOffset : before.length + content.length);
       setTimeout(() => {
         inputRef.current?.setNativeProps({
           selection: { start: cursorPos, end: cursorPos },
@@ -89,26 +86,30 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
 
   const handleLinePress = () => insertText('\n---\n');
 
-  const handleViewPress = () => {
-    const next = (viewIndex + 1) % viewArray.length;
-    setViewIndex(next);
-    const style = viewArray[next];
+  const handleViewPress = useCallback(() => {
+    const style = viewArray[viewIndex];
     if (style === 'view') return;
     switch (style) {
       case '𝑩':
-        insertText('**', '**');
+        insertText('**', '**', '', 2);
         break;
       case 'S̶':
-        insertText('~~', '~~');
+        insertText('~~', '~~', '', 2);
         break;
       case '</>':
-        insertText('`', '`');
+        insertText('`', '`', '', 1);
         break;
       case '𝑰':
-        insertText('*', '*');
+        insertText('*', '*', '', 1);
         break;
     }
-  };
+  }, [viewIndex, viewArray, insertText]);
+
+  const handleViewLongPress = useCallback(() => {
+    const next = (viewIndex + 1) % viewArray.length;
+    setViewIndex(next);
+    Vibration.vibrate(50);
+  }, [viewIndex, viewArray]);
 
   const handleSizePress = () => {
     const hashes = '#'.repeat(headingLevel) + ' ';
@@ -187,6 +188,7 @@ const VisualEditor: React.FC<IText> = ({ text, setText }) => {
         onMarkPress={handleMarkPress}
         onLinePress={handleLinePress}
         onViewPress={handleViewPress}
+        onViewLongPress={handleViewLongPress}
         onSizePress={handleSizePress}
         onSizeLongPress={handleSizeLongPress}
         onSavePress={handleSavePress}

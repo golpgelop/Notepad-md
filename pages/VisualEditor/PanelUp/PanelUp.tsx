@@ -11,6 +11,7 @@ interface IPanelUpProps {
   onLinePress: () => void;
   onViewPress: () => void;
   onSizePress: () => void;
+  onViewLongPress: () => void;
   onSizeLongPress: () => void;
   onSavePress: () => void;
 }
@@ -22,6 +23,7 @@ const PanelUp: React.FC<IPanelUpProps> = ({
   onMarkPress,
   onLinePress,
   onViewPress,
+  onViewLongPress,
   onSizePress,
   onSizeLongPress,
   onSavePress,
@@ -36,7 +38,12 @@ const PanelUp: React.FC<IPanelUpProps> = ({
         <Text style={panelup.ButtonText}>---</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={panelup.Button} onPress={onViewPress}>
+      <TouchableOpacity 
+      style={panelup.Button} 
+      onPress={onViewPress}
+      onLongPress={onViewLongPress}
+        delayLongPress={500}
+      >
         <Text style={panelup.ButtonText}>{viewValue}</Text>
       </TouchableOpacity>
 
