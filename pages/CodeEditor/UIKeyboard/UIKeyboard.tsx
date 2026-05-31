@@ -1,55 +1,60 @@
 import { TouchableOpacity, View, Text } from 'react-native';
 import { ui } from './UIKeyboard.styles';
 
-const UIKeyboard: React.FC = () => {
-    const handlePressLeft = () => {};
+interface IUIKeyboardProps {
+    onLeft: () => void;
+    onRight: () => void;
+    onUp: () => void;
+    onDown: () => void;
+    // остальные можно добавить позже
+    onPut?: () => void;
+    onPast?: () => void;
+    onCopy?: () => void;
+    onCancel?: () => void;
+}
 
-    const handlePressRight = () => {};
-
-    const handlePressUp = () => {};
-
-    const handlePressDown = () => {};
-
-    const handlePressPut = () => {};
-
-    const handlePressPast = () => {};
-
-    const handlePressCopy = () => {};
-
-    const handlePressCancel = () => {};
-
+const UIKeyboard: React.FC<IUIKeyboardProps> = ({
+    onLeft,
+    onRight,
+    onUp,
+    onDown,
+    onPut,
+    onPast,
+    onCopy,
+    onCancel,
+}) => {
     return (
         <View style={ui.container}>
-            <TouchableOpacity style={ui.Button} onPress={handlePressLeft}>
+            <TouchableOpacity style={ui.Button} onPress={onLeft}>
                 <Text style={ui.ButtonText}>←</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressRight}>
+            <TouchableOpacity style={ui.Button} onPress={onRight}>
                 <Text style={ui.ButtonText}>→</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressUp}>
+            <TouchableOpacity style={ui.Button} onPress={onUp}>
                 <Text style={ui.ButtonText}>↑</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressDown}>
+            <TouchableOpacity style={ui.Button} onPress={onDown}>
                 <Text style={ui.ButtonText}>↓</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressPut}>
-                <Text style={ui.ButtonText}>put</Text>  
+            <TouchableOpacity style={ui.Button} >
+                <Text style={ui.ButtonText}>put</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressPast}>
-                <Text style={ui.ButtonText}>past</Text>  
+            <TouchableOpacity style={ui.Button} >
+                <Text style={ui.ButtonText}>past</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressCopy}>
-                <Text style={ui.ButtonText}>copy</Text>  
+            <TouchableOpacity style={ui.Button} >
+                <Text style={ui.ButtonText}>copy</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={ui.Button} onPress={handlePressCancel}>
-                <Text style={ui.ButtonText}>cancel</Text>  
+            <TouchableOpacity style={ui.Button} >
+                <Text style={ui.ButtonText}>cancel</Text>
             </TouchableOpacity>
         </View>
     );
