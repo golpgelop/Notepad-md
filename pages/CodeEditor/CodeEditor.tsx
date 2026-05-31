@@ -27,11 +27,8 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     end: 0,
   });
 
-  
   const [selectionMode, setSelectionMode] = useState(false);
- 
   const anchorRef = useRef(0);
- 
   const programmaticRef = useRef(false);
 
   const handleChangeText = (newText: string) => {
@@ -42,14 +39,12 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     (e: any) => {
       const newSel = e.nativeEvent.selection;
 
-   
       if (programmaticRef.current) {
         programmaticRef.current = false;
         setSelection(newSel);
         return;
       }
 
-    
       if (selectionMode && newSel.start !== anchorRef.current) {
         setSelectionMode(false);
       }
@@ -59,20 +54,16 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     [selectionMode]
   );
 
-  // --- Вспомогательные функции ---
-
-
   const getLineInfo = (pos: number, lines: string[]) => {
     let lineStart = 0;
     for (let i = 0; i < lines.length; i++) {
       if (lineStart + lines[i].length >= pos) {
         return { lineIndex: i, col: pos - lineStart };
       }
-      lineStart += lines[i].length + 1; // +1 за \n
+      lineStart += lines[i].length + 1;
     }
     return { lineIndex: lines.length - 1, col: lines[lines.length - 1]?.length || 0 };
   };
-
 
   const getPosFromLineCol = (lineIndex: number, col: number, lines: string[]) => {
     let pos = 0;
@@ -83,31 +74,43 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     return pos;
   };
 
-  // --- Движение стрелками ---
+  // --- Движение стрелками (исправлено) ---
 
   const moveLeft = () => {
     inputRef.current?.focus();
     programmaticRef.current = true;
+
     if (!selectionMode) {
       setSelection((prev) => {
         const newPos =
-          prev.start === prev.end
-            ? Math.max(0, prev.start - 1)
-            : prev.start;
+          prev.start === prev.end ? Math.max(0, prev.start - 1) : prev.start;
         return { start: newPos, end: newPos };
       });
     } else {
       const anchor = anchorRef.current;
-      const newEnd = Math.max(0, selection.end - 1);
-      const start = Math.min(anchor, newEnd);
-      const end = Math.max(anchor, newEnd);
-      setSelection({ start, end });
+      let newStart = selection.start;
+      let newEnd = selection.end;
+
+      if (newStart === newEnd) {
+        // Начало выделения: сдвигаем влево от якоря
+        newStart = Math.max(0, newStart - 1);
+        // newEnd остаётся равным anchor
+      } else if (anchor <= newStart) {
+        // Якорь слева (или равен start) – двигаем правый конец (end)
+        newEnd = Math.max(newStart, newEnd - 1);
+      } else {
+        // Якорь справа – двигаем левый конец (start)
+        newStart = Math.max(0, newStart - 1);
+      }
+
+      setSelection({ start: newStart, end: newEnd });
     }
   };
 
   const moveRight = () => {
     inputRef.current?.focus();
     programmaticRef.current = true;
+
     if (!selectionMode) {
       setSelection((prev) => {
         const newPos =
@@ -118,10 +121,21 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
       });
     } else {
       const anchor = anchorRef.current;
-      const newEnd = Math.min(text.length, selection.end + 1);
-      const start = Math.min(anchor, newEnd);
-      const end = Math.max(anchor, newEnd);
-      setSelection({ start, end });
+      let newStart = selection.start;
+      let newEnd = selection.end;
+
+      if (newStart === newEnd) {
+        // Начало выделения: сдвигаем вправо от якоря
+        newEnd = Math.min(text.length, newEnd + 1);
+      } else if (anchor <= newStart) {
+        // Якорь слева – двигаем правый конец (end)
+        newEnd = Math.min(text.length, newEnd + 1);
+      } else {
+        // Якорь справа – двигаем левый конец (start) к якорю
+        newStart = Math.min(newEnd, newStart + 1);
+      }
+
+      setSelection({ start: newStart, end: newEnd });
     }
   };
 
@@ -129,20 +143,27 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     inputRef.current?.focus();
     programmaticRef.current = true;
     const lines = text.split('\n');
-    const cursorPos = selectionMode ? selection.end : selection.start;
-    const { lineIndex, col } = getLineInfo(cursorPos, lines);
 
-    if (lineIndex > 0) {
-      const newCol = Math.min(col, lines[lineIndex - 1].length);
-      const newPos = getPosFromLineCol(lineIndex - 1, newCol, lines);
-
-      if (!selectionMode) {
+    if (!selectionMode) {
+      const cursorPos = selection.start;
+      const { lineIndex, col } = getLineInfo(cursorPos, lines);
+      if (lineIndex > 0) {
+        const newCol = Math.min(col, lines[lineIndex - 1].length);
+        const newPos = getPosFromLineCol(lineIndex - 1, newCol, lines);
         setSelection({ start: newPos, end: newPos });
-      } else {
-        const anchor = anchorRef.current;
-        const start = Math.min(anchor, newPos);
-        const end = Math.max(anchor, newPos);
-        setSelection({ start, end });
+      }
+    } else {
+      const anchor = anchorRef.current;
+      // Определяем подвижный конец
+      const movablePos =
+        anchor <= selection.start ? selection.end : selection.start;
+      const { lineIndex, col } = getLineInfo(movablePos, lines);
+      if (lineIndex > 0) {
+        const newCol = Math.min(col, lines[lineIndex - 1].length);
+        const newPos = getPosFromLineCol(lineIndex - 1, newCol, lines);
+        const newStart = Math.min(anchor, newPos);
+        const newEnd = Math.max(anchor, newPos);
+        setSelection({ start: newStart, end: newEnd });
       }
     }
   };
@@ -151,37 +172,40 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     inputRef.current?.focus();
     programmaticRef.current = true;
     const lines = text.split('\n');
-    const cursorPos = selectionMode ? selection.end : selection.start;
-    const { lineIndex, col } = getLineInfo(cursorPos, lines);
 
-    if (lineIndex < lines.length - 1) {
-      const newCol = Math.min(col, lines[lineIndex + 1].length);
-      const newPos = getPosFromLineCol(lineIndex + 1, newCol, lines);
-
-      if (!selectionMode) {
+    if (!selectionMode) {
+      const cursorPos = selection.start;
+      const { lineIndex, col } = getLineInfo(cursorPos, lines);
+      if (lineIndex < lines.length - 1) {
+        const newCol = Math.min(col, lines[lineIndex + 1].length);
+        const newPos = getPosFromLineCol(lineIndex + 1, newCol, lines);
         setSelection({ start: newPos, end: newPos });
-      } else {
-        const anchor = anchorRef.current;
-        const start = Math.min(anchor, newPos);
-        const end = Math.max(anchor, newPos);
-        setSelection({ start, end });
+      }
+    } else {
+      const anchor = anchorRef.current;
+      const movablePos =
+        anchor <= selection.start ? selection.end : selection.start;
+      const { lineIndex, col } = getLineInfo(movablePos, lines);
+      if (lineIndex < lines.length - 1) {
+        const newCol = Math.min(col, lines[lineIndex + 1].length);
+        const newPos = getPosFromLineCol(lineIndex + 1, newCol, lines);
+        const newStart = Math.min(anchor, newPos);
+        const newEnd = Math.max(anchor, newPos);
+        setSelection({ start: newStart, end: newEnd });
       }
     }
   };
 
-  // --- Кнопка put (переключение режима выделения) ---
+  // --- Кнопки ---
   const handlePut = () => {
     if (!selectionMode) {
-
       anchorRef.current = selection.start;
       setSelectionMode(true);
     } else {
-
       setSelectionMode(false);
     }
   };
 
-  // --- Кнопка past (вставить из буфера и выйти из режима) ---
   const handlePast = async () => {
     try {
       const clipboardContent = await Clipboard.getString();
@@ -200,7 +224,6 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
     setSelectionMode(false);
   };
 
-  // --- Кнопка copy (копировать выделенное) ---
   const handleCopy = () => {
     const { start, end } = selection;
     const selectedText = text.substring(start, end);
@@ -209,7 +232,6 @@ const CodeEditor: React.FC<IText> = ({ text, setText }) => {
       Alert.alert('Скопировано', selectedText);
     }
   };
-
 
   return (
     <>
