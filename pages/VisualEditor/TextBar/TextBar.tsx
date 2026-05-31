@@ -10,9 +10,8 @@ interface ITextBarProps {
   editing: boolean;
   fontSize: number;
   onPressPreview: () => void;
-  onBlur: () => void;
   selectionRef: React.MutableRefObject<{ start: number; end: number }>;
-  inputRef: React.RefObject<TextInput>;
+  inputRef: React.RefObject<TextInput | null>;
 }
 
 const TextBar: React.FC<ITextBarProps> = ({
@@ -21,7 +20,6 @@ const TextBar: React.FC<ITextBarProps> = ({
   editing,
   fontSize,
   onPressPreview,
-  onBlur,
   selectionRef,
   inputRef,
 }) => {
@@ -34,7 +32,6 @@ const TextBar: React.FC<ITextBarProps> = ({
           multiline
           value={code}
           onChangeText={onChangeText}
-          onBlur={onBlur}
           onSelectionChange={(e) => {
             selectionRef.current = e.nativeEvent.selection;
           }}

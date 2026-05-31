@@ -6,7 +6,7 @@ interface ITextBarProps {
   code: string;
   currentLine: number;
   onChangeText: (text: string) => void;
-  inputRef: React.RefObject<TextInput>;
+  inputRef: React.RefObject<TextInput | null>;
   onSelectionChange: (e: any) => void;
   selection: { start: number; end: number }; 
 }
