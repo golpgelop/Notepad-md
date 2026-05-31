@@ -73,7 +73,7 @@ const Notes: React.FC<ISelectNode> = ({ selectedNote, setSelectedNote, setText }
                                 <Image style={notes.buttonSend} source={imageSend} />
                             </TouchableOpacity>
 
-                            <Text style={notes.head}>{note.name}</Text>
+                            <Text style={notes.head}>{note.name.slice(0, 20)}</Text>
                             <Text style={notes.description}>{note.text.slice(0, 80).replaceAll("\n", " ") + '...'}</Text>
                         </View>
                     );
