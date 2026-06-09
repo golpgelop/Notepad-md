@@ -1,2 +1,3 @@
 echo Create Expo...
-eas build --platform android --profile preview
+@REM eas build --platform android --profile preview
+eas build --platform android --profile development
