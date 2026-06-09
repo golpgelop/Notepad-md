@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
-import * as FileSystem from 'expo-file-system/legacy'; // ← заменили импорт
+import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 
 export interface ShareNoteArgs {
