@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy'; // ← заменили импорт
 import * as Sharing from 'expo-sharing';
 
 export interface ShareNoteArgs {
@@ -18,6 +18,7 @@ export const useFileSharer = (): UseFileSharerReturn => {
 
   const shareFile = async ({ title, content }: ShareNoteArgs): Promise<boolean> => {
     setIsSharing(true);
+    let tempFileUri: string | null = null;
 
     try {
       const isAvailable = await Sharing.isAvailableAsync();
@@ -26,23 +27,31 @@ export const useFileSharer = (): UseFileSharerReturn => {
         return false;
       }
 
-      const cacheDir: string | null = FileSystem.cacheDirectory ?? null;
-      if (!cacheDir) {
-        Alert.alert('Ошибка', 'Не удалось получить доступ к временной папке');
-        return false;
-      }
-
       const sanitizedTitle = title.replace(/[/\\?%*:|"<>]/g, '-');
       const fileName = sanitizedTitle.endsWith('.md')
         ? sanitizedTitle
         : `${sanitizedTitle}.md`;
-      const fileUri = `${cacheDir}${fileName}`;
 
-      await FileSystem.writeAsStringAsync(fileUri, content, {
-        encoding: 'utf8' as const,
-      });
+      const cacheDir = FileSystem.cacheDirectory ?? '';
+      const docDir = FileSystem.documentDirectory ?? '';
 
-      await Sharing.shareAsync(fileUri, {
+      try {
+        tempFileUri = cacheDir + fileName;
+        console.log('Trying to write to cache:', tempFileUri);
+        await FileSystem.writeAsStringAsync(tempFileUri, content, {
+          encoding: 'utf8' as const,
+        });
+      } catch (cacheError) {
+        console.warn('Cache write failed, falling back to document directory', cacheError);
+        tempFileUri = docDir + fileName;
+        console.log('Trying to write to documents:', tempFileUri);
+        await FileSystem.writeAsStringAsync(tempFileUri, content, {
+          encoding: 'utf8' as const,
+        });
+      }
+
+      console.log('File written, sharing:', tempFileUri);
+      await Sharing.shareAsync(tempFileUri, {
         mimeType: 'text/markdown',
         dialogTitle: `Отправить: ${fileName}`,
         UTI: 'net.daringfireball.markdown',
@@ -51,9 +60,16 @@ export const useFileSharer = (): UseFileSharerReturn => {
       return true;
     } catch (error) {
       console.error('Ошибка при шеринге файла:', error);
-      Alert.alert('Ошибка', 'Не удалось сформировать или отправить файл');
+      Alert.alert('Ошибка', 'Не удалось создать или отправить файл');
       return false;
     } finally {
+      if (tempFileUri) {
+        try {
+          await FileSystem.deleteAsync(tempFileUri, { idempotent: true });
+        } catch (cleanupError) {
+          console.warn('Не удалось удалить временный файл:', cleanupError);
+        }
+      }
       setIsSharing(false);
     }
   };
